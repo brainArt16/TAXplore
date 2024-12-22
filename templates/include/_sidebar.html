@@ -1,0 +1,41 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+         <li class="nav-item">
+            <a class="nav-link" href="{% url 'portal:home' %}">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'portal:knowledge' %}">
+                <i class=" mdi mdi-book-open-variant  menu-icon"></i>
+                <span class="menu-title">Knowledge</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "portal:deployment" %}" onclick="setDashboardBlack()">
+                <i class="mdi mdi-arrow-up-bold-hexagon-outline menu-icon"></i>
+                <span class="menu-title">Deployment</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="setDashboardBlack()">
+                <i class="mdi mdi-wrench  menu-icon"></i>
+                <span class="menu-title">Tools</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "portal:analysis" %}" onclick="setDashboardBlack()">
+                <i class=" mdi mdi-chart-bar  menu-icon"></i>
+                <span class="menu-title">Analysis</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "portal:chat" %}" onclick="setDashboardBlack()">
+                <i class=" mdi mdi-step-forward-2  menu-icon"></i>
+                <span class="menu-title">Playground</span>
+            </a>
+        </li>
+    </ul>
+</nav>
