@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block main %}
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+              <h3 class="font-weight-bold">Documents & URLs</h3>
+              <h6 class="font-weight-normal mb-0">
+                The documents and URLs you upload here will be used as the knowledge base for the chatbot.
+              </h6>
+            </div>
+            <div class="col-12 col-xl-4">
+              <div class="justify-content-end d-flex">
+                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                  <button class="btn btn-sm btn-light bg-white"
+                          type="button"
+                          id="dropdownMenuDate2"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="true">
+                    <i class="mdi mdi-calendar"></i> Today (<script>document.write(new Date().toLocaleDateString())</script>)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center mt-lg-5">
+        <div class="col-md-6 grid-margin transparent">
+          <div class="row">
+            <div class="col-md-12 mb-4 stretch-card transparent">
+              <div class="card transparent">
+                <div class="card-body">
+                  <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                    <div class="dropzone-content">
+                      <i class="mdi mdi-cloud-upload-outline"></i>
+                      <p>Drag and drop your file here or click to upload</p>
+                      <input type="file" name="file" />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock main %}
