@@ -1,12 +1,25 @@
 {% extends "base.html" %}
+{% block sidebar %}{% endblock sidebar %}
+{% block navbar %}
+{% include "include/_homenavbar.html" %}
+{% endblock navbar %}
+
 {% block main %}
-  <div class="main-panel">
+  <div class="main-panel home-panel">
     <div class="content-wrapper">
       <div class="row">
         <div class="col-md-12 grid-margin">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
           <div class="row">
             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-              <h3 class="font-weight-bold">Welcome {{ request.user.first_name }} {{ request.user.last_name }}</h3>
+              <h3 class="font-weight-bold">Welcome {{ request.user.first_name }} {{ request.user.last_name }} </h3>
               <h6 class="font-weight-normal mb-0">
                 The Bot is up and  running! You have <span class="text-primary">3 unread alerts!</span>
               </h6>
@@ -14,29 +27,42 @@
             <div class="col-12 col-xl-4">
               <div class="justify-content-end d-flex">
                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                  <button class="btn btn-sm btn-light bg-white"
-                          type="button"
-                          id="dropdownMenuDate2"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="true">
-                    <i class="mdi mdi-calendar"></i> Today (<script>document.write(new Date().toLocaleDateString())</script>)
-                  </button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#botModal">Create New Bot</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-3 grid-margin transparent">
-        <div class="row">
-          <div class="col-md-12 mb-4 stretch-card transparent">
-            <div class="card card">
-              <div class="card-body"></div>
+      <div class="row">
+        {% if not object_list %}
+          <div class="col-md-12 grid-margin">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              You have not created any bots yet. Click on the button above to create a new bot.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           </div>
-        </div>
+        {% endif %}
+        {% for bot in object_list %}
+          <div class="col-md-3 mb-4 stretch-card transparent">
+            <div class="card bot-card">
+              <a href="{% url 'portal:knowledge' bot.id %}" class="text-decoration-none text-dark">
+                <div class="card-header border-0 d-flex justify-content-between align-items-baseline">
+                <h4 class="card-title me-2"><i class="mdi mdi-robot-vacuum fs-30"></i> {{ bot.name }}</h4>
+                <span class="badge bg-secondary"> {{ bot.tag }}</span>
+                </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <span class="font-weight-bold"></span> {{ bot.description }}
+                </p>
+              </div>
+            </a>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
+
+  {% include "modals/create_bot.html" %}
 {% endblock main %}

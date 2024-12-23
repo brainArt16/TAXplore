@@ -11,7 +11,7 @@ urlpatterns = [
     path("analysis/", AnalysisView.as_view(), name="analysis"),
     path("chat/", ChatView.as_view(), name="chat"),
     path("deployment/", DeploymentView.as_view(), name="deployment"),
-    path("knowledge/", KnowledgeView.as_view(), name="knowledge"),
+    path("knowledge/<int:pk>/", KnowledgeView.as_view(), name="knowledge"),
     
   
 ]

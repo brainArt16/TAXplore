@@ -1,0 +1,146 @@
+<div class="modal fade"
+     id="uploadModal"
+     tabindex="-1"
+     aria-labelledby="uploadModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog bot-modal">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button"
+                        class="border-0 bg-transparent"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    <i class="mdi mdi-circle fs-5 text-danger"></i>
+                </button>
+                <div class="d-flex justify-content-between">
+                    <button type="button"
+                            class="btn btn-outline-primary border-0 mx-2"
+                            id="document-upload">Document</button>
+                    <button type="button"
+                            class="btn btn-outline-primary border-0 mx-2"
+                            id="url-upload">URL</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title mx-2 fw-bold" id="uploadModalLabel">Documents</h3>
+                <p class="modal-subtitle mx-2" id="uploadModalSubtitle">
+                    The documents you upload here will be used as the knowledge base for the <span class="fw-bold">{{ bot.name }}</span> chatbot.
+                </p>
+                <!-- Document Upload Form -->
+                <div id="document-form"
+                     class="d-flex justify-content-center align-items-center mt-lg-5">
+                    <div class="col-md-6 grid-margin transparent">
+                        <div class="row">
+                            <div class="col-md-12 mb-4 stretch-card transparent">
+                                <div class="card transparent">
+                                    <div class="card-body">
+                                        <form class="dropzone" id="my-awesome-dropzone">
+                                            <div class="dropzone-content">
+                                                <i class="mdi mdi-cloud-upload-outline"></i>
+                                                <p>Drag and drop your file here or click to upload</p>
+                                                <input type="file" name="file" id="file" />
+                                            </div>
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- URL Form -->
+                <div id="url-form" class="d-none mt-3 mx-2">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="url" class="form-label">Enter URL</label>
+                            <input type="url"
+                                   class="form-control border-0 border-bottom bg-body-tertiary"
+                                   id="url"
+                                   name="url"
+                                   placeholder="Enter the URL">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-primary" id="submit-form">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+ document.addEventListener('DOMContentLoaded', function () {
+    const documentButton = document.getElementById('document-upload');
+    const urlButton = document.getElementById('url-upload');
+    const documentForm = document.getElementById('document-form');
+    const urlForm = document.getElementById('url-form');
+    const uploadLabel = document.getElementById('uploadModalLabel');
+    const uploadSubtitle = document.getElementById('uploadModalSubtitle');
+    const submitButton = document.getElementById('submit-form');
+
+    function toggleForms(showDocument) {
+        if (showDocument) {
+            uploadLabel.textContent = 'Documents';
+            uploadSubtitle.innerHTML = `The documents you upload here will be used as the knowledge base for the <span class="fw-bold">{{ bot.name }}</span> chatbot.`;
+            documentForm.classList.remove('d-none');
+            urlForm.classList.add('d-none');
+            documentButton.classList.add('btn-primary');
+            documentButton.classList.remove('btn-outline-primary');
+            urlButton.classList.add('btn-outline-primary');
+            urlButton.classList.remove('btn-primary');
+        } else {
+            uploadLabel.textContent = 'URLs';
+            uploadSubtitle.textContent = `The URLs you upload here will be used as the knowledge base for the {{ bot.name }} chatbot.`;
+            documentForm.classList.add('d-none');
+            urlForm.classList.remove('d-none');
+            urlButton.classList.add('btn-primary');
+            urlButton.classList.remove('btn-outline-primary');
+            documentButton.classList.add('btn-outline-primary');
+            documentButton.classList.remove('btn-primary');
+        }
+    }
+
+    documentButton.addEventListener('click', () => toggleForms(true));
+    urlButton.addEventListener('click', () => toggleForms(false));
+
+    submitButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const formData = new FormData();
+        const fileInput = document.getElementById('file');
+        const urlInput = document.getElementById('url');
+        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+        // Validate file or URL
+        if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]);
+        } else if (urlInput && urlInput.value.trim() !== '') {
+            formData.append('url', urlInput.value.trim());
+        } else {
+            alert('Please upload a file or provide a URL.');
+            return;
+        }
+
+        fetch('{% url "portal:knowledge" bot.id %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken,
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not OK');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+});
+
+</script>

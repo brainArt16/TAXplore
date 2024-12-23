@@ -31,11 +31,15 @@
   <body>
     <div class="container-scroller">
       <!-- partial:include/_navbar.html -->
+       {% block navbar %}
       {% include "include/_navbar.html" %}
+      {% endblock navbar %}
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
+        {% block sidebar %} 
         {% include "include/_sidebar.html" %}
+        {% endblock sidebar %}
         <!-- partial -->
         {% block main %}
         {% endblock main %}

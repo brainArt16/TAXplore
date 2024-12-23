@@ -1,20 +1,26 @@
 {% load static %}
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <div class="text-center sidebar-bot mb-0">
+        <i class="mdi mdi-robot-vacuum fs-30"></i>
+        <span class="menu-title">{{ bot.name }}</span>
+    </div>
     <ul class="nav">
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="{% url 'portal:home' %}">
-                <i class="icon-grid menu-icon"></i>
-                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-arrow-left menu-icon"></i>
+                <span class="menu-title">Home</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'portal:knowledge' %}">
+            <a class="nav-link" href="{% url "portal:knowledge" bot.id %}">
                 <i class=" mdi mdi-book-open-variant  menu-icon"></i>
                 <span class="menu-title">Knowledge</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url "portal:deployment" %}" onclick="setDashboardBlack()">
+            <a class="nav-link"
+               href="{% url "portal:deployment" %}"
+               onclick="setDashboardBlack()">
                 <i class="mdi mdi-arrow-up-bold-hexagon-outline menu-icon"></i>
                 <span class="menu-title">Deployment</span>
             </a>
@@ -26,15 +32,25 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url "portal:analysis" %}" onclick="setDashboardBlack()">
+            <a class="nav-link"
+               href="{% url "portal:analysis" %}"
+               onclick="setDashboardBlack()">
                 <i class=" mdi mdi-chart-bar  menu-icon"></i>
                 <span class="menu-title">Analysis</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url "portal:chat" %}" onclick="setDashboardBlack()">
+        <li class="nav-item mt-auto">
+            <a class="nav-link"
+               href="{% url "portal:chat" %}"
+               onclick="setDashboardBlack()">
                 <i class=" mdi mdi-step-forward-2  menu-icon"></i>
                 <span class="menu-title">Playground</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="" onclick="setDashboardBlack()">
+                <i class="mdi mdi-cogs menu-icon"></i>
+                <span class="menu-title">Settings</span>
             </a>
         </li>
     </ul>

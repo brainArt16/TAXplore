@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Company, KnowledgeBase, User, KnowledgeBaseDocument
+from .models import Company, User
 import random
 
 @admin.register(User)
@@ -50,15 +50,3 @@ class CompanyAdmin(admin.ModelAdmin):
     search_fields = ["name", "address", "phone", "email", "website"]
     ordering = ["name"]
 
-@admin.register(KnowledgeBase)
-class KnowledgeBaseAdmin(admin.ModelAdmin):
-    list_display = ["collection_name", "description", "knowledge_base_type", "company", "created_at", "is_active"]
-    list_filter = ["knowledge_base_type", "is_active"]
-    search_fields = ["collection_name", "description"]
-    ordering = ["collection_name"]
-
-@admin.register(KnowledgeBaseDocument)
-class KnowledgeBaseDocumentAdmin(admin.ModelAdmin):
-    list_display = ["document", "knowledge_base", "created_at"]
-    list_filter = ["knowledge_base"]
-    search_fields = ["document"]

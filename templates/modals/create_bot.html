@@ -1,0 +1,51 @@
+<div class="modal fade"
+     id="botModal"
+     tabindex="-1"
+     aria-labelledby="botModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h4 class="modal-title" id="botModalLabel">Create New Bot</h4>
+                <button type="button"
+                        class="border-0 bg-transparent"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"><i class="mdi mdi-circle fs-5 text-danger"></i></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'portal:home' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="bot-name" class="col-form-label">Bot Name</label>
+                        <input type="text"
+                               class="form-control border-0 border-bottom bg-body-tertiary"
+                               id="bot-name"
+                               name="bot_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bot-description" class="col-form-label">Description</label>
+                        <textarea class="form-control border-0 border-bottom bg-body-tertiary"
+                                  id="bot-description"
+                                  name="bot_description"
+                                  rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bot-tag" class="col-form-label">Industry</label>
+                        <select class="form-control bg-body-tertiary"
+                                id="bot-tag"
+                                name="bot_tag">
+                            <option selected>Choose...</option>
+                            {% for tag in tags %}
+                                <option value="{{ tag.id }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
