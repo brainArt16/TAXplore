@@ -5,28 +5,30 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header border-0">
+            <div class="modal-header border-0 mx-2">
                 <h4 class="modal-title" id="botModalLabel">Create New Bot</h4>
                 <button type="button"
                         class="border-0 bg-transparent"
                         data-bs-dismiss="modal"
                         aria-label="Close"><i class="mdi mdi-circle fs-5 text-danger"></i></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body mx-2">
                 <form method="post" action="{% url 'portal:home' %}">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="bot-name" class="col-form-label">Bot Name</label>
                         <input type="text"
-                               class="form-control border-0 border-bottom bg-body-tertiary"
+                               class="form-control border-0 border-bottom bg-body-tertiary rounded-4"
                                id="bot-name"
+                               placeholder="Enter name of your bot"
                                name="bot_name">
                     </div>
                     <div class="mb-3">
                         <label for="bot-description" class="col-form-label">Description</label>
-                        <textarea class="form-control border-0 border-bottom bg-body-tertiary"
+                        <textarea class="form-control border-0 border-bottom bg-body-tertiary rounded-4"
                                   id="bot-description"
                                   name="bot_description"
+                                  placeholder="Enter description about your bot"
                                   rows="4"></textarea>
                     </div>
                     <div class="mb-3">
