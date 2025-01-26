@@ -71,3 +71,20 @@ class KnowledgeBaseDocument(models.Model):
         return (
             f"Document for {self.knowledge_base.collection_name} - {self.document.name}"
         )
+
+
+class Deployment(models.Model):
+    PLATFORMS = (
+        (1, "Facebook Messenger"),
+        (2, "WhatsApp"),
+        (3, "Telegram"),
+        (4, "Web"),
+    )
+    bot = models.ForeignKey(Bot, on_delete=models.CASCADE, related_name="deployments")
+    platform = models.IntegerField(choices=PLATFORMS)
+    platform_data = models.JSONField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.bot.name} - {self.get_platform_display()}"

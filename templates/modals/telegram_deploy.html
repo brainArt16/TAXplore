@@ -1,0 +1,50 @@
+<div class="modal fade"
+     id="deployModal"
+     tabindex="-1"
+     aria-labelledby="deployModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0 mx-2">
+                <h4 class="modal-title fs-3" id="deployModalLabel">Telegram</h4>
+                <button type="button"
+                        class="border-0 bg-transparent"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"><i class="mdi mdi-circle fs-5 text-danger"></i></button>
+            </div>
+            <div class="modal-body mx-2">
+                <div class="d-flex flex-column">
+                    <p>Deploy your chatbot on Telegram and engage users on a secure platform. 
+                    Ensure you have your bot token ready and optionally you can use custom start message to provide a personalized experience for your users.</p>
+                    <div class="d-flex justify-content-end align-items-center">
+                        <i class="mdi mdi-circle fs-5 text-success">Live</i>
+                        <button class="btn btn-success btn-sm ms-2"><i class="mdi mdi-rocket-launch-outline"></i>Deploy</button>
+                    </div>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="token" class="col-form-label">Access Token</label>
+                        <input type="password"
+                               class="form-control border-0 border-bottom bg-body-tertiary"
+                               id="token"
+                               placeholder="Enter telegram bot token"
+                               name="token">
+                    </div>
+                    <div class="mb-3">
+                        <label for="start-text" class="col-form-label">Start Text</label>
+                        <textarea class="form-control border-0 border-bottom bg-body-tertiary"
+                                  id="start_text"
+                                  name="start_text"
+                                  placeholder="Enter start text"
+                                  rows="2"></textarea>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

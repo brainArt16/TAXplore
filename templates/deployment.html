@@ -20,16 +20,16 @@
 
       <!-- Telegram Deployment -->
       <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
+        <div class="card" data-bs-toggle="modal" data-bs-target="#deployModal" style="cursor: pointer;">
+            <div class="card-body">
             <h4 class="card-title">Telegram</h4>
             <div class="media">
               <i class=" mdi mdi-near-me  icon-md text-primary d-flex align-self-start me-3"></i>
               <div class="media-body">
-                <p class="card-text">Deploy your chatbot on Telegram and engage users on a secure platform.</p>
+              <p class="card-text">Deploy your chatbot on Telegram and engage users on a secure platform.</p>
               </div>
             </div>
-          </div>
+            </div>
         </div>
       </div>
 
@@ -65,4 +65,5 @@
     </div>
   </div>
 </div>
+{% include "modals/telegram_deploy.html" %}
 {% endblock main %}

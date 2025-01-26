@@ -112,3 +112,7 @@ class DeploymentView(LoginRequiredMixin, DetailView):
     login_url = "/login/"
     model = Bot
     context_object_name = "bot"
+    
+    def telegram_deployment(self):
+        pass
+        

@@ -25730,13 +25730,19 @@ table.dataTable tbody td.select-checkbox:after {
 }
 
 /* Bot Dialog Modal */
-#botModal {
+.modal {
   backdrop-filter: blur(2px);
 
 }
 
 #botModal .modal-dialog {
   max-width: 35%;
+  border-radius: 10px;
+  margin-top: 70px;
+}
+
+#deployModal .modal-dialog {
+  max-width: 50%;
   border-radius: 10px;
   margin-top: 70px;
 }

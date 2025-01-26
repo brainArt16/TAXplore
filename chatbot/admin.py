@@ -44,3 +44,10 @@ class KnowledgeBaseDocumentAdmin(admin.ModelAdmin):
     list_display = ["document", "knowledge_base", "created_at"]
     list_filter = ["knowledge_base"]
     search_fields = ["document"]
+
+@admin.register(Deployment)
+class DeploymentAdmin(admin.ModelAdmin):
+    list_display = ["bot", "created_at"]
+    search_fields = ["bot"]
+    list_filter = ["created_at"]
+    readonly_fields = ["created_at"]
