@@ -3,10 +3,10 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <a class="navbar-brand brand-logo me-5" href="{% url "portal:home" %}">
-            <img src="{{ request.user.company.logo }}" class="me-2" alt="logo" width="" height=""/>
+            <img src="{% static 'images/logo1.svg' %}" class="me-2" alt="logo" width="" height=""/>
         </a>
         <a class="navbar-brand brand-logo-mini" href="{% url "portal:home" %}">
-            <img src="{{ request.user.company.logo }}" alt="logo" width="" height="" />
+            <img src="{% static 'images/logo1.svg' %}" alt="logo" width="" height=""/>
         </a>
         
     </div>

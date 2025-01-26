@@ -48,8 +48,6 @@ class KnowledgeView(LoginRequiredMixin, DetailView):
             else None
         )
 
-        print(knowledge)
-
         if knowledge:
             documents = (
                 knowledge.documents.all()
@@ -58,7 +56,6 @@ class KnowledgeView(LoginRequiredMixin, DetailView):
             )
             context["documents"] = documents
 
-        print(context)
         return context
     
     def post(self, request, *args, **kwargs):
@@ -96,14 +93,22 @@ class KnowledgeView(LoginRequiredMixin, DetailView):
         return redirect("portal:knowledge", pk=bot.id)
 
 
-class AnalysisView(LoginRequiredMixin, TemplateView):
+class AnalysisView(LoginRequiredMixin, DetailView):
     template_name = "analysis.html"
     login_url = "/login/"
+    model = Bot
+    context_object_name = "bot"
 
-class ChatView(LoginRequiredMixin, TemplateView):
+
+class ChatView(LoginRequiredMixin, DetailView):
     template_name = "chat.html"
     login_url = "/login/"
+    model = Bot
+    context_object_name = "bot"
 
-class DeploymentView(LoginRequiredMixin, TemplateView):
+
+class DeploymentView(LoginRequiredMixin, DetailView):
     template_name = "deployment.html"
     login_url = "/login/"
+    model = Bot
+    context_object_name = "bot"

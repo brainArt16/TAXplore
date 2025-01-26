@@ -19,7 +19,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               href="{% url "portal:deployment" %}"
+               href="{% url "portal:deployment" bot.id %}"
                onclick="setDashboardBlack()">
                 <i class="mdi mdi-arrow-up-bold-hexagon-outline menu-icon"></i>
                 <span class="menu-title">Deployment</span>
@@ -33,7 +33,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               href="{% url "portal:analysis" %}"
+               href="{% url "portal:analysis" bot.id %}"
                onclick="setDashboardBlack()">
                 <i class=" mdi mdi-chart-bar  menu-icon"></i>
                 <span class="menu-title">Analysis</span>
@@ -41,7 +41,7 @@
         </li>
         <li class="nav-item mt-auto">
             <a class="nav-link"
-               href="{% url "portal:chat" %}"
+               href="{% url "portal:chat" bot.id %}"
                onclick="setDashboardBlack()">
                 <i class=" mdi mdi-step-forward-2  menu-icon"></i>
                 <span class="menu-title">Playground</span>
