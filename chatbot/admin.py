@@ -16,15 +16,6 @@ class BotAdmin(admin.ModelAdmin):
     list_filter = ("created_at", "updated_at")
     readonly_fields = ("created_at", "updated_at")
 
-
-@admin.register(BotTemplate)
-class BotTemplateAdmin(admin.ModelAdmin):
-    list_display = ("bot", "created_at", "updated_at")
-    search_fields = ("bot",)
-    list_filter = ("created_at", "updated_at")
-    readonly_fields = ("created_at", "updated_at")
-
-
 @admin.register(KnowledgeBase)
 class KnowledgeBaseAdmin(admin.ModelAdmin):
     list_display = [
@@ -51,3 +42,17 @@ class DeploymentAdmin(admin.ModelAdmin):
     search_fields = ["bot"]
     list_filter = ["created_at"]
     readonly_fields = ["created_at"]
+    
+@admin.register(AIModel)
+class AIModelAdmin(admin.ModelAdmin):
+    list_display = ["name", "created_at", "updated_at"]
+    search_fields = ["name"]
+    list_filter = ["created_at", "updated_at"]
+    readonly_fields = ["created_at", "updated_at"]
+    
+@admin.register(BotSetting)
+class BotSettingAdmin(admin.ModelAdmin):
+    list_display = ["bot", "ai_model", "created_at", "updated_at"]
+    search_fields = ["bot", "ai_model"]
+    list_filter = ["created_at", "updated_at"]
+    readonly_fields = ["created_at", "updated_at"]

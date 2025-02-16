@@ -22,14 +22,29 @@ class Bot(models.Model):
     def __str__(self):
         return self.name
 
-class BotTemplate(models.Model):
+class AIModel(models.Model):
+    name = models.CharField(max_length=100)
+    max_tokens = models.IntegerField()
+    context_window = models.IntegerField()
+    license_type = models.CharField(max_length=100)
+    license_key = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.name
+    
+class BotSetting(models.Model):
     bot = models.OneToOneField(Bot, on_delete=models.CASCADE)
+    ai_model = models.ForeignKey(AIModel, on_delete=models.CASCADE)
     template = models.TextField()
+    token_limit = models.IntegerField()
+    temperature = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.bot.name
+        return self.bot.name + " - " + self.ai_model.name
 
 
 class KnowledgeBase(models.Model):
@@ -83,6 +98,7 @@ class Deployment(models.Model):
     bot = models.ForeignKey(Bot, on_delete=models.CASCADE, related_name="deployments")
     platform = models.IntegerField(choices=PLATFORMS)
     platform_data = models.JSONField()
+    active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

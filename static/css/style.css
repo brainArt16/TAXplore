@@ -25747,6 +25747,24 @@ table.dataTable tbody td.select-checkbox:after {
   margin-top: 70px;
 }
 
+#confirmDeleteModal .modal-dialog {
+  max-width: 50%;
+  border-radius: 10px;
+  margin-top: 250px;
+}
+
+#botConfigurationAlertModal .modal-dialog  {
+  max-width: 40%;
+  border-radius: 10px;
+  margin-top: 250px;
+}
+
+#configModal .modal-dialog {
+  max-width: 50%;
+  border-radius: 10px;
+  margin-top: 70px;
+}
+
 /* Upload Dialog Modal */
 #uploadModal { 
   backdrop-filter: blur(2px);
